@@ -1,8 +1,17 @@
+const fs = require('fs');
+const path = require('path');
 const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();    //instantiates the server
 const { animals } = require('./data/animals.json');
+//-----NEXT 4 LINES HAVE TO BE SETUP EVERY TIME TO ACCEPT POST DATA
+//parse incoming string or array data
+app.use(express.urlencoded({ extended: true}));
+//parse incoming JSON data
+app.use(express.json());
 
+
+//-----------------------------------------------------FUNCTIONS
 function filterByQuery(query, animalsArray) {
     let personalityTraitsArray = [];
     // Note that we save the animalsArray as filteredResults here:
@@ -49,8 +58,53 @@ function findById(id, animalsArray) {
     return result;
 }
 
+function createNewAnimal(body, animalsArray) {
+    //our function's main code will go here!
+    const animal = body;
+    animalsArray.push(animal);
+    fs.writeFileSync(
+        path.join(__dirname, './data/animals.json'),
+        JSON.stringify({ animals: animalsArray }, null, 2)
+    );
+
+    //rteurn finished code to post route for response
+    return animal;
+}
+
+function validateAnimal(animal) {
+    if (!animal.name || typeof animal.name !== 'string') {
+      return false;
+    }
+    if (!animal.species || typeof animal.species !== 'string') {
+      return false;
+    }
+    if (!animal.diet || typeof animal.diet !== 'string') {
+      return false;
+    }
+    if (!animal.personalityTraits || !Array.isArray(animal.personalityTraits)) {
+      return false;
+    }
+    return true;
+  }
+//---------------------------------------------------POST REQs
+app.post('/api/animals', (req, res) => {
+    //req.body is where our incoming content will be 
+    // set id based on what the next index of the array will be
+    req.body.id = animals.length.toString();
+
+    //if any data in req.body is incorrect, send 400 error back
+    if (!validateAnimal(req.body)) {
+        res.status(400).send("The animal is not properly formatted.");
+    } else {
+        //add animal to json file and animlas array to this function
+        const animal = createNewAnimal(req.body, animals);
+        res.json(animal);
+    }
+});
+
+//---------------------------------------------------GET ROUTES
 app.get('/api/animals', (req, res) => {
-    // res.send('Hellow!');
+    // res.send('Meow!');
     let results = animals;
     if (req.query) {
         results = filterByQuery(req.query, results);

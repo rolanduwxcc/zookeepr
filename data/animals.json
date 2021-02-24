@@ -108,6 +108,26 @@
         "loving"
       ],
       "id": "10"
+    },
+    {
+      "name": "Ralph",
+      "species": "raccoon",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry",
+        "sneaky"
+      ],
+      "id": "11"
+    },
+    {
+      "name": "1",
+      "species": "raccoon",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry",
+        "sneaky"
+      ],
+      "id": "12"
     }
   ]
 }
