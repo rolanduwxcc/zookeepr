@@ -128,6 +128,35 @@
         "sneaky"
       ],
       "id": "12"
+    },
+    {
+      "name": "1",
+      "species": "raccoon",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry",
+        "sneaky"
+      ],
+      "id": "13"
+    },
+    {
+      "name": "1",
+      "species": "raccoon",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry",
+        "sneaky"
+      ],
+      "id": "14"
+    },
+    {
+      "name": "Larry",
+      "species": "lemur",
+      "diet": "omnivore",
+      "personalityTraits": [
+        "hungry"
+      ],
+      "id": "15"
     }
   ]
 }
