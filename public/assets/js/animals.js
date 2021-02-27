@@ -46,6 +46,7 @@ const getAnimals = (formData = {}) => {
 };
 
 const handleGetAnimalsSubmit = event => {
+  console.log("What did the 5 fingers say to the face?");
   event.preventDefault();
   const dietRadioHTML = $animalForm.querySelectorAll('[name="diet"]');
   let diet;
